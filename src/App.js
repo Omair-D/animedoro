@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
+import {Howl} from 'howler';
+
+// media
+import narutoMp3 from '../src/media/naruto_bell.mp3'
+
+// asset
+let endSfx = new Howl ({
+  src: [ narutoMp3 ],
+})
 
 function App() {
   const [ isRunning, setIsRunning ] = useState(false)
@@ -23,6 +32,7 @@ function App() {
       // Check if time ends
       if(timeMin === 0 && timeSec === 0){
         setIsRunning(false)
+        endSfx.play()
       }
 
       }, 1000)
