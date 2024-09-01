@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
 
 function App() {
+  const [ isRunning, setIsRunning ] = useState(false)
+  const [ timeMin, setTimeMin ] = useState(40)
+  const [ timeSec, setTimeSec ] = useState(0)
+
+  // Rendered JSX
   return (
     <div className='container'>
       <div className="d-flex align-items-center flex-column">
@@ -13,7 +18,7 @@ function App() {
         </div>
 
         <div className='Timer py-4 my-2'>
-          <h2 className='display-1 align-self-center'>40:00</h2>
+          <h2 className='display-1 align-self-center'>{timeMin}:{timeSec < 10 ? "0" + timeSec : timeSec }</h2>
         </div>
     </div>
     <div className='Ctrl py-2 my-10 d-grid gap-2 fixed-bottom'>
