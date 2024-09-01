@@ -17,7 +17,7 @@ function App() {
       }
       // Decrease Minutes
       if( timeSec === 0){
-        setTimeMin((setTimeMin) => timeMin -1)
+        setTimeMin((TimeMin) => timeMin -1)
         setTimeSec(59)
       }
       // Check if time ends
@@ -31,8 +31,19 @@ function App() {
   }, [isRunning, timeMin, timeSec])
 
   // Component Functions
+  const startTimer = () => {
+    setIsRunning(true)
+  }
 
+  const pauseTimer = () => {
+    setIsRunning(false)
+  }
 
+  const resetTimer = () => {
+    setIsRunning(false)
+    setTimeMin(40)
+    setTimeSec(0)
+  }
 
   // Rendered JSX
   return (
@@ -40,7 +51,7 @@ function App() {
       <div className="d-flex align-items-center flex-column">
         <div className = 'Lead'>
           <h2 className='display-2'>
-            Animedoro Timer
+            Animedoro
           </h2>
         </div>
 
@@ -49,9 +60,9 @@ function App() {
         </div>
     </div>
     <div className='Ctrl py-2 my-10 d-grid gap-2 fixed-bottom'>
-      <Button variant="dark" size ="lg">Start</Button>
-      <Button variant="secondary" size ="lg">Reset</Button>
-      <Button variant="light" size ="lg">Pause</Button>
+      <Button variant="dark" size ="lg" onClick={startTimer}>Start</Button>
+      <Button variant="secondary" size ="lg" onClick={resetTimer}>Reset</Button>
+      <Button variant="light" size ="lg" onClick={pauseTimer}>Pause</Button>
     </div> 
   </div>
 
