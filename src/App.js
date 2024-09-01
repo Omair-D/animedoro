@@ -67,6 +67,11 @@ function App() {
 
         <div className='Timer py-4 my-2'>
           <h2 className='display-1 align-self-center'>{timeMin}:{timeSec < 10 ? "0" + timeSec : timeSec }</h2>
+          <div className='time-ctrl d-flex justify-content-center flex-row'>
+
+            <Button variant="dark" className='mx-1' size="lg"><h1>-</h1></Button> <Button variant="dark" className='mx-1'><h1>+</h1></Button>
+
+          </div>
         </div>
     </div>
     <div className='Ctrl py-2 my-10 d-grid gap-2 fixed-bottom'>
