@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
 
@@ -6,6 +6,33 @@ function App() {
   const [ isRunning, setIsRunning ] = useState(false)
   const [ timeMin, setTimeMin ] = useState(40)
   const [ timeSec, setTimeSec ] = useState(0)
+
+  // useEffect
+  useEffect(() => {
+    if (isRunning){
+      const intervalAni = setInterval(() => {
+      // Decrease Seconds
+      if( timeSec > 0){
+        setTimeSec((timeSec) => timeSec -1)
+      }
+      // Decrease Minutes
+      if( timeSec === 0){
+        setTimeMin((setTimeMin) => timeMin -1)
+        setTimeSec(59)
+      }
+      // Check if time ends
+      if(timeMin === 0 && timeSec === 0){
+        setIsRunning(false)
+      }
+
+      }, 1000)
+      return () => clearInterval(intervalAni)
+    }
+  }, [isRunning, timeMin, timeSec])
+
+  // Component Functions
+
+
 
   // Rendered JSX
   return (
