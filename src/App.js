@@ -14,31 +14,55 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [timeMin, setTimeMin] = useState(40);
   const [timeSec, setTimeSec] = useState(0);
+  const [ onBreak, setOnBreak ] = useState(false)
+  const [workInterval, setWorkInterval ] = useState(0)
+  const [ breakInterval, setBreakInterval ] = useState(0)
 
-  // useEffect
+
+  // useEffect 
   useEffect(() => {
-    if (isRunning) {
+    if (isRunning){
       const intervalAni = setInterval(() => {
         // Decrease Seconds
-        if (timeSec > 0) {
-          setTimeSec((timeSec) => timeSec - 1);
+        if( timeSec > 0){
+          setTimeSec((timeSec) => timeSec -1 )
         }
-        // Decrease Minutes
-        if (timeSec === 0) {
-          if (timeMin > 0) {
-            setTimeMin((timeMin) => timeMin - 1);
-            setTimeSec(59);
+        // Decrease Minutes 
+        if( timeSec === 0){
+          setTimeMin((timeMin) => timeMin -1)
+          setTimeSec(59)
+        }
+        // Check if time ends 
+        if(timeMin === 0 && timeSec === 0){
+          setTimeSec(0)
+          setTimeMin(0)
+          narutoMp3.play()
+          // Keep track of intervals
+          if(!onBreak){
+            setWorkInterval((workInterval) => workInterval + 1)
+            
+            
+            if(workInterval > 0 && workInterval % 3 === 0){
+              setTimeMin(25)
+            } else {
+              setTimeMin(23)
+            }
+            setOnBreak(true)
           }
+          if (onBreak) {
+            setBreakInterval((breakInterval) => breakInterval + 1)
+            setTimeMin(25)
+            setOnBreak(false)
+          }
+         
         }
-        // Check if time ends
-        if (timeMin === 0 && timeSec === 0) {
-          setIsRunning(false);
-          endSfx.play();
-        }
-      }, 1000);
-      return () => clearInterval(intervalAni);
+      }, 1000)
+      return () => {
+
+        clearInterval(intervalAni)
+      }
     }
-  }, [isRunning, timeMin, timeSec]);
+  }, [isRunning, timeMin, timeSec, workInterval, breakInterval])
 
   // Component Functions
   const startTimer = () => {
@@ -100,10 +124,14 @@ function App() {
             >
               <h1>+</h1>
             </Button>
+            
           </div>
+          
         </div>
+        <h2 className='h2'><span>📚{workInterval}</span>/📺{breakInterval}</h2>
       </div>
       <div className='Ctrl py-2 my-10 d-grid gap-2 fixed-bottom'>
+        
         <Button variant="dark" size="lg" onClick={startTimer}>Start</Button>
         <Button variant="secondary" size="lg" onClick={resetTimer}>Reset</Button>
         <Button variant="light" size="lg" onClick={pauseTimer}>Pause</Button>
