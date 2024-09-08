@@ -9,6 +9,15 @@
     background-repeat: no-repeat;
     overflow: hidden;
   }
+
+  .youtube-video {
+    position: absolute;
+    top: 40px;   /* Adjust the distance from the top */
+    left: 40px;  /* Adjust the distance from the left */
+    width: 200px; /* Adjust the size of the video */
+    height: 169px; /* Maintain 16:9 ratio */
+  }
+  
   
   /* Make all h1, h2 elements and other text elements white */
   h1, h2, .display-1, .display-2, .h2 {

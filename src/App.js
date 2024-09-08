@@ -90,12 +90,20 @@ function App() {
 
   // Rendered JSX
   return (
+    
     <div className='app-container'>
+    <div className="youtube-video">
+      <div className="ratio ratio-16x9">
+        <iframe 
+          src="https://www.youtube.com/embed/Na0w3Mz46GA?si=vTlot_9t8CQ2l04j" 
+          title="YouTube video" 
+          allowFullScreen>
+        </iframe>
+      </div>
+    </div>
       
       <div className="d-flex align-items-center flex-column">
-      <div className="ratio ratio-16x9">
-  <iframe src="https://www.youtube.com/embed/Na0w3Mz46GA?si=vTlot_9t8CQ2l04j" title="YouTube video" allowfullscreen></iframe>
-</div>
+      
         <div className='Lead'>
           <h2 className='display-2'>Animedoro</h2>
           
