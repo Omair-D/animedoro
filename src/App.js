@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Howl } from 'howler';
-
+import './App.css';
 // media
 import narutoMp3 from '../src/media/naruto_bell.mp3';
-
 // asset
 let endSfx = new Howl({
   src: [narutoMp3],
@@ -90,7 +89,7 @@ function App() {
 
   // Rendered JSX
   return (
-    <div className='container'>
+    <div className='app-container'>
       <div className="d-flex align-items-center flex-column">
         <div className='Lead'>
           <h2 className='display-2'>Animedoro</h2>
@@ -121,7 +120,7 @@ function App() {
             </Button>
           </div>
         </div>
-        <h2 className='h2'>
+        <h2 className='h2' style={{ color: 'white' }}>
           📚 {workInterval} / 📺 {breakInterval}
         </h2>
       </div>

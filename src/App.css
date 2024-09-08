@@ -1,0 +1,22 @@
+.app-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/backgroundanime.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+  
+  /* Make all h1, h2 elements and other text elements white */
+  h1, h2, .display-1, .display-2, .h2 {
+    color: white;
+  }
+  
+  .content {
+    color: white;
+    text-align: center;
+  }
+  
