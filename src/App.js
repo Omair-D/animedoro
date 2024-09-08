@@ -14,55 +14,47 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [timeMin, setTimeMin] = useState(40);
   const [timeSec, setTimeSec] = useState(0);
-  const [ onBreak, setOnBreak ] = useState(false)
-  const [workInterval, setWorkInterval ] = useState(0)
-  const [ breakInterval, setBreakInterval ] = useState(0)
+  const [onBreak, setOnBreak] = useState(false);
+  const [workInterval, setWorkInterval] = useState(0);
+  const [breakInterval, setBreakInterval] = useState(0);
+  const [initialWorkTime, setInitialWorkTime] = useState(40); // Store the user-set work time
 
-
-  // useEffect 
   useEffect(() => {
-    if (isRunning){
+    if (isRunning) {
       const intervalAni = setInterval(() => {
-        // Decrease Seconds
-        if( timeSec > 0){
-          setTimeSec((timeSec) => timeSec -1 )
-        }
-        // Decrease Minutes 
-        if( timeSec === 0){
-          setTimeMin((timeMin) => timeMin -1)
-          setTimeSec(59)
-        }
-        // Check if time ends 
-        if(timeMin === 0 && timeSec === 0){
-          setTimeSec(0)
-          setTimeMin(0)
-          narutoMp3.play()
-          // Keep track of intervals
-          if(!onBreak){
-            setWorkInterval((workInterval) => workInterval + 1)
-            
-            
-            if(workInterval > 0 && workInterval % 3 === 0){
-              setTimeMin(25)
+        // Decrease seconds first
+        if (timeSec > 0) {
+          setTimeSec((timeSec) => timeSec - 1);
+        } else if (timeSec === 0) {
+          if (timeMin === 0) {
+            // When both minutes and seconds reach 0
+            endSfx.play();
+            setIsRunning(false); // Pause the timer
+            if (!onBreak) {
+              // If it's a work interval ending
+              setWorkInterval((workInterval) => workInterval + 1);
+              setOnBreak(true); // Start break timer
+              setTimeMin(23);
+              setTimeSec(0);
+              setIsRunning(true); // Automatically start break timer
             } else {
-              setTimeMin(23)
+              // If it's a break interval ending
+              setBreakInterval((breakInterval) => breakInterval + 1);
+              setOnBreak(false); // Start work timer
+              setTimeMin(initialWorkTime); // Reset to the user-set work time
+              setTimeSec(0);
+              setIsRunning(true); // Automatically start work timer
             }
-            setOnBreak(true)
+          } else {
+            // Decrease minutes and reset seconds
+            setTimeMin((timeMin) => timeMin - 1);
+            setTimeSec(59);
           }
-          if (onBreak) {
-            setBreakInterval((breakInterval) => breakInterval + 1)
-            setTimeMin(25)
-            setOnBreak(false)
-          }
-         
         }
-      }, 1000)
-      return () => {
-
-        clearInterval(intervalAni)
-      }
+      }, 1000);
+      return () => clearInterval(intervalAni);
     }
-  }, [isRunning, timeMin, timeSec, workInterval, breakInterval])
+  }, [isRunning, timeMin, timeSec, onBreak, initialWorkTime]);
 
   // Component Functions
   const startTimer = () => {
@@ -75,19 +67,24 @@ function App() {
 
   const resetTimer = () => {
     setIsRunning(false);
-    setTimeMin(40);
+    setOnBreak(false);
+    setTimeMin(initialWorkTime); // Reset to user-set work time
     setTimeSec(0);
+    setWorkInterval(0);
+    setBreakInterval(0);
   };
 
   const reduceTime = () => {
     if (timeMin > 40) {
       setTimeMin((timeMin) => timeMin - 1);
+      setInitialWorkTime((initialWorkTime) => initialWorkTime - 1); // Update initial work time
     }
   };
 
   const increaseTime = () => {
     if (timeMin < 60) {
       setTimeMin((timeMin) => timeMin + 1);
+      setInitialWorkTime((initialWorkTime) => initialWorkTime + 1); // Update initial work time
     }
   };
 
@@ -96,9 +93,7 @@ function App() {
     <div className='container'>
       <div className="d-flex align-items-center flex-column">
         <div className='Lead'>
-          <h2 className='display-2'>
-            Animedoro
-          </h2>
+          <h2 className='display-2'>Animedoro</h2>
         </div>
 
         <div className='Timer py-4 my-2'>
@@ -124,14 +119,13 @@ function App() {
             >
               <h1>+</h1>
             </Button>
-            
           </div>
-          
         </div>
-        <h2 className='h2'><span>📚{workInterval}</span>/📺{breakInterval}</h2>
+        <h2 className='h2'>
+          📚 {workInterval} / 📺 {breakInterval}
+        </h2>
       </div>
       <div className='Ctrl py-2 my-10 d-grid gap-2 fixed-bottom'>
-        
         <Button variant="dark" size="lg" onClick={startTimer}>Start</Button>
         <Button variant="secondary" size="lg" onClick={resetTimer}>Reset</Button>
         <Button variant="light" size="lg" onClick={pauseTimer}>Pause</Button>
