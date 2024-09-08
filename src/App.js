@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import { Howl } from 'howler';
 import './App.css';
@@ -90,9 +91,15 @@ function App() {
   // Rendered JSX
   return (
     <div className='app-container'>
+      
       <div className="d-flex align-items-center flex-column">
+      <div className="ratio ratio-16x9">
+  <iframe src="https://www.youtube.com/embed/Na0w3Mz46GA?si=vTlot_9t8CQ2l04j" title="YouTube video" allowfullscreen></iframe>
+</div>
         <div className='Lead'>
           <h2 className='display-2'>Animedoro</h2>
+          
+
         </div>
 
         <div className='Timer py-4 my-2'>
