@@ -1,4 +1,5 @@
 # Animedoro Timer
+## Animedoro is a React-based productivity timer application inspired by the Pomodoro technique, but with longer study intervals followed by anime breaks. The timer allows users to set a customizable work duration and includes a YouTube video player for background ambiance.
 ![hi](https://github.com/Omair-D/animedoro/blob/main/src/media/animedoro_animation.gif)
 
 
