@@ -2,7 +2,13 @@
 ## Animedoro is a React-based productivity timer application inspired by the Pomodoro technique, but with longer study intervals followed by anime breaks. The timer allows users to set a customizable work duration and includes a YouTube video player for background ambiance.
 ![hi](https://github.com/Omair-D/animedoro/blob/main/src/media/animedoro_animation.gif)
 
+## Features
 
+- **Customizable Work Time**: Adjust your work time between 40 and 60 minutes.
+- **Break Time**: Automatically switch to a 23-minute break after each work interval.
+- **Work and Break Counter**: Tracks the number of work sessions and breaks completed.
+- **Audio Alerts**: Plays a sound when the timer ends.
+- **Embedded YouTube Video**: Includes an embedded anime video for background ambiance during study sessions.
 
 # Getting Started with Create React App
 
