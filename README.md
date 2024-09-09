@@ -1,3 +1,8 @@
+# Animedoro Timer
+![hi](https://github.com/Omair-D/animedoro/blob/main/src/media/animedoro_animation.gif)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
