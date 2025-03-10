@@ -136,7 +136,7 @@ function App() {
           </div>
         </div>
         <h2 className='h2' style={{ color: 'white' }}>
-          📚 <span>{workInterval} / 📺 {breakInterval}</span>
+        <span>📚 {workInterval} / 📺 {breakInterval}</span>
         </h2>
       </div>
       <div className='Ctrl py-2 my-10 d-grid gap-2 fixed-bottom'>
